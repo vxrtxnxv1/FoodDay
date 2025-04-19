@@ -13,8 +13,7 @@ from telegram.ext import (
 from flask import Flask
 from threading import Thread
 
-# ✅ Токен напрямую (можно заменить на os.getenv("TOKEN"))
-TOKEN = "8105265851:AAFLQHmVlT0EiUO3MSxec7UeLU9M3WNsOzg"
+TOKEN = os.getenv("TOKEN")
 DATA_FILE = "dishes.json"
 ADD_DISH = 1
 
@@ -23,7 +22,7 @@ web_app = Flask(__name__)
 
 @web_app.route('/')
 def home():
-    return "Я жив!"
+    return "Бот работает!"
 
 def run_web():
     web_app.run(host="0.0.0.0", port=8080)
@@ -88,7 +87,7 @@ async def add_dish(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Такое блюдо уже есть или оно некорректное.")
     return ConversationHandler.END
 
-# Запуск Telegram-бота
+# Запуск бота
 if __name__ == "__main__":
     application = ApplicationBuilder().token(TOKEN).build()
 
